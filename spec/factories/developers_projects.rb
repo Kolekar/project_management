@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :developers_project do
     developer_id 1
-    project_id ""
+    project_id ''
   end
 end
