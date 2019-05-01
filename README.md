@@ -25,8 +25,8 @@ Things you may want to cover:
 * How to run the application:\
   rails s
 
-* Assignment: [PDF](RORAssignment.pdf) \ 
-Write a Rails application for managing projects weekly todo list. 
+* Assignment: [See Assignment in PDF format](RORAssignment.pdf) 
+## Write a Rails application for managing projects weekly todo list. 
  
 In an organization project manager generally work with multiple projects, multiple teams, team 
 member. 
@@ -64,11 +64,10 @@ developer and developer can have many projects)
 6. On admin's dashboard (After login page), 
 1. At any given point of time he will see a list of all developer list with todo in following 
 format. 
+
  
- 
- 
-2.
-3.
+![alt text](public/table_format.png)
+
 Show same view as above, but instead of developer it should show data project‐wise. 
 Also show graph using google chart api (https://developers.google.com/chart/) 
  
