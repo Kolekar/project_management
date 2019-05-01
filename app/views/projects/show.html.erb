@@ -1,0 +1,9 @@
+
+<p id="notice"><%= notice %></p>
+<h1><%= @project.name %></h1>  <%= link_to 'New Task', new_project_task_path(@project.id) %>
+<p>
+  <%= @project.description %>
+</p>
+
+<%= render '/layouts/tasks_chart' %>
+</div>

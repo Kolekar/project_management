@@ -1,3 +1,18 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+
+  before_action :authenticate_developer!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name is_manager])
+  end
+
+  def authonticate_manager!
+    redirect_to '/' unless current_developer.is_manager
+  end
 end

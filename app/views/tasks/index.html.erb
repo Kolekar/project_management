@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Statis</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+
+        <td>
+          <div class="field">
+            <%= radio_button_tag "status#{task.id}", 'backlog',  task.backlog?, 'data-task-id' => task.id %>
+            <%= label :status, "New" %>
+            <%= radio_button_tag "status#{task.id}", 'in_progress',  task.in_progress? , 'data-task-id' => task.id%>
+            <%= label :status, "In-Progress" %>
+            <%= radio_button_tag "status#{task.id}", 'done', task.done?, 'data-task-id' => task.id %>
+            <%= label :status, "Done" %>
+          </div></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  $.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+  $('input[type=radio]').change(function() {
+    $.ajax({
+      method: "PUT",
+      url: "/tasks/" + $(this).data("task-id"),
+      data: { status: this.value }
+    }).done(function() {
+      alert("Update succesfully")
+    });
+});
+</script>
+

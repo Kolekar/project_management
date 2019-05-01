@@ -1,0 +1,28 @@
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Status', 'Number of tasks'],
+          ['New',     <%= @status["backlog"] || 0 %>],
+          ['Done',    <%= @status["done"] || 0 %>],
+          ['In-progress',  <%= @status["in_progress"] || 0 %>],
+        ]);
+
+        var options = {
+          title: 'Tasks detail'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+<div class="row">
+<div class="col-sm-12">
+	
+<div id="piechart" style="width: 800px; height: 500px" ></div>
+
+</div>

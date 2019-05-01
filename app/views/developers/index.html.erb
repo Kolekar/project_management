@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Developers</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <% @developers.each do |k,v| %>
+        <th><%= k %></th>
+      <% end %>
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Done</td>
+      <% @developers.each do |k, developer| %>
+        <td><div><%= collect_task_name developer[2] %></div></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>In-Progress</td>
+      <% @developers.each do |k, developer| %>
+        <td><div><%= collect_task_name developer[1] %></div></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>New</td>
+      <% @developers.each do |k, developer| %>
+        <td><div><%= collect_task_name developer[0] %></div></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

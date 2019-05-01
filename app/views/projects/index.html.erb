@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Projects</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <% @projects.each do |k,v| %>
+        <th><%= link_to k, project_path(v.first[1][0]['id']) %></th>
+      <% end %>
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Done</td>
+      <% @projects.each do |k, project| %>
+        <td><div><%= collect_task_name project[2] %></div></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>In-Progress</td>
+      <% @projects.each do |k, project| %>
+        <td><div><%= collect_task_name project[1] %></div></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>New</td>
+      <% @projects.each do |k, project| %>
+        <td><div><%= collect_task_name project[0] %></div></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>

@@ -9,6 +9,45 @@
   </head>
 
   <body>
-    <%= yield %>
+  	<!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <span class="navbar-brand">Project Management</span>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="/">Home </a>
+	      </li>
+	      <% if current_developer.try(:is_manager) %>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/developers">Developer</a>
+		      </li>
+		  
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Project
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="/projects">All</a>
+		          <a class="dropdown-item" href="/projects/new">New</a>
+		        </div>
+		      </li>
+		   <% else %>
+	       	<li class="nav-item">
+		        <a class="nav-link" href="/tasks">Tasks</a>
+		      </li>
+		    <% end %>
+	    </ul>
+	    <span class="navbar-text">
+	      <% if developer_signed_in? %>
+	        <%= link_to 'Logout', destroy_developer_session_path, method: :delete, class: "dropdown-item"%>
+	      <% end %>
+	    </span>
+	  </div>
+	</nav>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
