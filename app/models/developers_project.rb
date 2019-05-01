@@ -6,6 +6,5 @@ class DevelopersProject < ApplicationRecord
   has_many :tasks
 
   validates :developer_id, uniqueness: { scope: :project_id }
-  validates :developer_id, :project_id, numericality: { only_integer: true }
   validates :developer, :project, presence: true
 end

@@ -8,7 +8,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.create!(email: 'admmin@admin.com', password: '123456789', name: 'Manager A')
+manager = Developer.create!(email: 'manager@developer.com', password: '123456789', name: 'Developer A', is_manager: true)
 
 da = Developer.create!(email: 'developera@developer.com', password: '123456789', name: 'Developer A')
 db = Developer.create!(email: 'developerb@developer.com', password: '123456789', name: 'Developer B')
@@ -16,19 +16,19 @@ dc = Developer.create!(email: 'developerc@developer.com', password: '123456789',
 dd = Developer.create!(email: 'developerd@developer.com', password: '123456789', name: 'Developer D')
 de = Developer.create!(email: 'developere@developer.com', password: '123456789', name: 'Developer E')
 
-pa = Project.create!(name: 'Project A', description: 'description A')
+pa = manager.projects.create!(name: 'Project A', description: 'description A')
 pa.developers = [da, db, dc]
 pa.save!
-pb = Project.create!(name: 'Project B', description: 'description B')
+pb = manager.projects.create!(name: 'Project B', description: 'description B')
 pb.developers = [db, dc, dd]
 pb.save!
-pc = Project.create!(name: 'Project C', description: 'description C')
+pc = manager.projects.create!(name: 'Project C', description: 'description C')
 pc.developers = [dc, dd, de]
 pc.save!
-pd = Project.create!(name: 'Project D', description: 'description D')
+pd = manager.projects.create!(name: 'Project D', description: 'description D')
 pd.developers = [dd, de, da]
 pd.save!
-pe = Project.create!(name: 'Project E', description: 'description E')
+pe = manager.projects.create!(name: 'Project E', description: 'description E')
 pe.developers = [de, da, db]
 pe.save!
 

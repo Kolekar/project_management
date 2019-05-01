@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: project, local: true) do |form| %>
   <% if project.errors.any? %>
     <div id="error_explanation">
@@ -16,7 +18,22 @@
     <%= form.text_field :name, id: :project_name %>
   </div>
 
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :project_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :developers %>
+    <%= select_tag "developer_ids[]", options_from_collection_for_select(Developer.developers, "id", "name"), class: "selectpicker", 'multiple data-live-search' => true, multiple: "multiple" %>
+  </div>
+
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $('select').selectpicker();
+</script>

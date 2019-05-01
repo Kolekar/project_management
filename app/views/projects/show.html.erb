@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
 
+<p id="notice"><%= notice %></p>
+<h1><%= @project.name %></h1>  <%= link_to 'New Task', new_project_task_path(@project.id) %>
 <p>
-  <strong>Name:</strong>
-  <%= @project.name %>
+  <%= @project.description %>
 </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= render '/layouts/tasks_chart' %>
+</div>

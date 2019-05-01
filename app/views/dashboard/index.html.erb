@@ -1,0 +1,62 @@
+<h1>Dashboard</h1>
+<% if current_developer.is_manager %>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Project', 'Backlog', 'Inprogress', 'Done'],
+          <% @projects.map(&:attributes).group_by{|p|p['name']}.each do |k, v| %>
+            <% backlog =  v.find{|p| p['status'] == 0} 
+               backlog = backlog ? backlog['task_count'] : 0 %>
+            <% inprogress =  v.find{|p| p['status'] == 1} 
+               inprogress = inprogress ? inprogress['task_count'] : 0 %>
+            <% done =  v.find{|p| p['status'] == 2} 
+               done = done ? done['task_count'] : 0 %>
+            [<%= "'#{k}' , #{backlog} , #{inprogress}, #{done}".html_safe %>],
+          <% end %>
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Project',
+            subtitle: 'Backlog Inprogress and Done task'
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material_project'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+        ////
+        var data = google.visualization.arrayToDataTable([
+          ['Developers', 'Backlog', 'Inprogress', 'Done'],
+          <% @developers.map(&:attributes).group_by{|p|p['name']}.each do |k, v| %>
+            <% backlog =  v.find{|p| p['status'] == 0} 
+               backlog = backlog ? backlog['task_count'] : 0 %>
+            <% inprogress =  v.find{|p| p['status'] == 1} 
+               inprogress = inprogress ? inprogress['task_count'] : 0 %>
+            <% done =  v.find{|p| p['status'] == 2} 
+               done = done ? done['task_count'] : 0 %>
+            [<%= "'#{k}' , #{backlog} , #{inprogress}, #{done}".html_safe %>],
+          <% end %>
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Developers',
+            subtitle: 'Backlog Inprogress and Done task'
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material_developer'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+<div id="columnchart_material_project" style="width: 800px; height: 500px;"></div>
+<div id="columnchart_material_developer" style="width: 800px; height: 500px;"></div>
+<% else %>
+  <%= render '/layouts/tasks_chart' %>
+<% end %>
